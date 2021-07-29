@@ -8,6 +8,7 @@ const FormInput = ({ name, label }) => {
   return (
     <Grid item xs={12} sm={6}>
       <Controller
+        // default=""
         control={control}
         name={name}
         render={({ field: { onChange } }) => (

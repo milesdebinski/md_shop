@@ -69,8 +69,7 @@ const AddressForm = ({ checkoutToken, next }) => {
         region,
       }
     );
-    console.log(checkoutTokenId, { country, region });
-    console.log(options);
+
     setShippingOptions(options);
     setShippingOption(options[0].id); // initial value for shipping option
   };

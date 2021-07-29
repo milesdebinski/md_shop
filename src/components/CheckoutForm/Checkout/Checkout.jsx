@@ -13,6 +13,7 @@ import { commerce } from "../../../lib/commerce";
 import useStyles from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
+import { Link } from "react-router-dom";
 
 const steps = ["Shipping address", "Payment details"];
 const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
@@ -27,11 +28,15 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
-
         setCheckoutToken(token);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
-    generateToken();
+    if (cart.total_items > 0) {
+      generateToken();
+    }
+    // generate token only if cart is not empty
   }, [cart]); // update as soon as the cart changes
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -40,12 +45,48 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   // getting data from AddressForm and passing it to shippingData and then to PaymentForm
   const next = (data) => {
     setShippingData(data);
-    console.log("next data: ");
-    console.log(data);
+
     nextStep();
   };
 
-  const Confirmation = () => <div>Confirmation!</div>;
+  let Confirmation = () =>
+    order.customer ? (
+      <>
+        {console.log(`ALL GOOD: ${order.customer}`)}
+        {console.log(order.customer)}
+        <div>
+          <Typography variant="h5">
+            Thank you for your purchase, {order.customer.firstname}{" "}
+            {order.customer.lastname}!
+          </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="subtitle2">
+            Order ref: {order.customer_reference}
+          </Typography>
+        </div>
+        <br />
+
+        <Button component={Link} to="/" variant="outlined" type="button">
+          Back to Home
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        {console.log(`ERROR - SPINNING CIRCLE: ${order.customer}`)}
+
+        <CircularProgress />
+      </div>
+    );
+
+  if (error) {
+    <>
+      <Typography variant="h5">Error: {error}</Typography>
+      <br />
+      <Button component={Link} to="/" variant="outlined" type="button">
+        Back to Home
+      </Button>
+    </>;
+  }
 
   const Form = () =>
     activeStep === 0 ? (
