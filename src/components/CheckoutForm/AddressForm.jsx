@@ -54,7 +54,7 @@ const AddressForm = ({ checkoutToken, next }) => {
     );
 
     setShippingSubdivisions(subdivisions);
-    setShippingSubdivision(Object.keys(subdivisions)[0]);
+    setShippingSubdivision(Object.keys(subdivisions)[0]); // initial value for shipping subdivision
   };
 
   const fetchShippingOptions = async (
@@ -69,9 +69,10 @@ const AddressForm = ({ checkoutToken, next }) => {
         region,
       }
     );
-
+    console.log(checkoutTokenId, { country, region });
+    console.log(options);
     setShippingOptions(options);
-    setShippingOption(options[0].id);
+    setShippingOption(options[0].id); // initial value for shipping option
   };
 
   useEffect(() => {
@@ -97,6 +98,7 @@ const AddressForm = ({ checkoutToken, next }) => {
         Shipping Address
       </Typography>
       <FormProvider {...methods}>
+        {/* <form onSubmit={methods.handleSubmit((data) => console.log(data))}> */}
         <form
           onSubmit={methods.handleSubmit((data) =>
             next({

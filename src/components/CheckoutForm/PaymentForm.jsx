@@ -34,8 +34,12 @@ const PaymentForm = ({
     if (error) {
       console.log(error);
     } else {
+      // console.log(checkoutToken);
+      console.log("shippingData: ");
+      console.log(shippingData);
+      // analyzie all input information!
       const orderData = {
-        list_items: checkoutToken.live.line_items,
+        line_items: checkoutToken.live.line_items,
         customer: {
           firstname: shippingData.firstName,
           lastname: shippingData.lastName,

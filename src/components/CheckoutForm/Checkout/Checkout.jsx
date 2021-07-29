@@ -37,8 +37,11 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
+  // getting data from AddressForm and passing it to shippingData and then to PaymentForm
   const next = (data) => {
     setShippingData(data);
+    console.log("next data: ");
+    console.log(data);
     nextStep();
   };
 

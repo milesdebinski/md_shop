@@ -42,9 +42,6 @@ const Product = ({ product, onAddToCart }) => {
         >
           <AddShoppingCart />
         </IconButton>
-        <Button variant="contained" color="primary">
-          ELO
-        </Button>
       </CardActions>
     </Card>
   );
