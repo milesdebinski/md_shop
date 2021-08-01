@@ -14,8 +14,8 @@ const Cart = ({
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your cart.{" "}
-      <Link to="/" className={classes.link}>
+      There are no headphones in your cart...{" "}
+      <Link to="/store" className={classes.link}>
         Add some
       </Link>
       !
@@ -38,7 +38,7 @@ const Cart = ({
       </Grid>
       <div className={classes.cardDetails}>
         <Typography variant="h4">
-          Subtotal: {cart.subtotal.formatted_with_symbol}
+          Total: {cart.subtotal.formatted_with_symbol}
         </Typography>
         <div>
           <Button
@@ -73,7 +73,7 @@ const Cart = ({
     <Container>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h3" gutterBottom>
-        Your Shopping Cart
+        Shopping Cart
       </Typography>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
     </Container>

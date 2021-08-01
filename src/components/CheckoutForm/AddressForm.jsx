@@ -114,7 +114,7 @@ const AddressForm = ({ checkoutToken, next }) => {
             <FormInput name="address1" label="Address" />
             <FormInput name="email" label="Email" />
             <FormInput name="city" label="City" />
-            <FormInput name="postCode" label="Post code" />
+            <FormInput name="postCode" label="Postal/zip code" />
 
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
@@ -132,7 +132,7 @@ const AddressForm = ({ checkoutToken, next }) => {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <InputLabel>Shipping Subdivision</InputLabel>
+              <InputLabel>Shipping Province/State</InputLabel>
               <Select
                 value={shippingSubdivision}
                 fullWidth

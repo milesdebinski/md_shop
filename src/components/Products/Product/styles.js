@@ -1,13 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { amber } from "@material-ui/core/colors";
 
 export default makeStyles(() => ({
   root: {
-    // maxWidth: 345, original width style
     maxWidth: "100%",
+    backgroundColor: "#fccd40",
+    border: "1px solid #fccd40",
   },
   media: {
     height: 0,
-    // paddingTop: "56.25%", // 16:9
     paddingTop: "100%",
   },
   cardActions: {

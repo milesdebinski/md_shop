@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Divider,
   Button,
+  CssBaseline,
 } from "@material-ui/core";
 import { commerce } from "../../../lib/commerce";
 import useStyles from "./styles";
@@ -20,6 +21,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
+  const [isFinished, setIsFinished] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -49,6 +51,12 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     nextStep();
   };
 
+  const timeout = () => {
+    setTimeout(() => {
+      setIsFinished(true);
+    }, 4500);
+  };
+
   let Confirmation = () =>
     order.customer ? (
       <>
@@ -70,9 +78,20 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
           Back to Home
         </Button>
       </>
+    ) : isFinished ? (
+      <>
+        <div>
+          <Typography variant="h5">Thank you for your purchase!</Typography>
+          <Divider className={classes.divider} />
+        </div>
+        <br />
+        <Button component={Link} to="/" variant="outlined" type="button">
+          Back to Home
+        </Button>
+      </>
     ) : (
       <div className={classes.spinner}>
-        {console.log(`ERROR - SPINNING CIRCLE: ${order.customer}`)}
+        {console.log(`ERROR/LOADING - SPINNING CIRCLE`)}
 
         <CircularProgress />
       </div>
@@ -98,10 +117,12 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         backStep={backStep}
         onCaptureCheckout={onCaptureCheckout}
         nextStep={nextStep}
+        timeout={timeout}
       />
     );
   return (
     <>
+      <CssBaseline />
       <div className={classes.toolbar} />
       <main className={classes.layout}>
         <Paper className={classes.paper}>

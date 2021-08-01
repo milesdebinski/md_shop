@@ -2,7 +2,7 @@ import React from "react";
 import theme from "./theme";
 import "fontsource-roboto";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { Products, Navbar, Cart, Checkout } from "./components";
+import { Products, Navbar, Cart, Checkout, Home } from "./components";
 import { commerce } from "./lib/commerce";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -70,12 +70,16 @@ const App = () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Navbar totalItems={cart.total_items} />
+        <Route exact path="/">
+          <Home></Home>
+        </Route>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/store">
+            <Navbar totalItems={cart.total_items} />
             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/cart">
+            <Navbar totalItems={cart.total_items} />
             <Cart
               cart={cart}
               handleUpdateCartQty={handleUpdateCartQty}
@@ -84,6 +88,7 @@ const App = () => {
             />
           </Route>
           <Route exact path="/checkout">
+            <Navbar totalItems={cart.total_items} />
             <Checkout
               cart={cart}
               order={order}

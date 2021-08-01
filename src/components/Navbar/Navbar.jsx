@@ -7,10 +7,11 @@ import {
   MenuItem,
   Menu,
   Typography,
+  Button,
+  ButtonGroup,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+import { ShoppingCart, Home, Store } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/MDShop.svg";
 import useStyles from "./styles";
 
 const Navbar = ({ totalItems }) => {
@@ -21,24 +22,21 @@ const Navbar = ({ totalItems }) => {
     <>
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
-          <Typography
+          <IconButton
+            variant="outlined"
+            color="secondary"
             component={Link}
             to="/"
-            variant="h6"
-            className={classes.title}
-            color="inherit"
           >
-            <img
-              src={logo}
-              alt="md_shop"
-              height="30px"
-              className={classes.image}
-            />
-            md_shop
-          </Typography>
+            <Home />
+          </IconButton>
+          <IconButton color="secondary" component={Link} to="/store">
+            <Store />
+          </IconButton>
+
           <div className={classes.grow} />
           <div className={classes.button} />
-          {location.pathname === "/" && (
+          {location.pathname === "/store" && (
             <IconButton
               component={Link}
               to="/cart"
